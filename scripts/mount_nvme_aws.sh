@@ -11,7 +11,7 @@ then
 fi
 
 mkfs -t xfs -f /dev/nvme1n1
-rm -rf $1flexgen_offload_dir
-mkdir $1flexgen_offload_dir
-mount /dev/nvme1n1 $1flexgen_offload_dir
-chmod a+rw $1flexgen_offload_dir
+rm -rf $1flexllmgen_offload_dir
+mkdir $1flexllmgen_offload_dir
+mount /dev/nvme1n1 $1flexllmgen_offload_dir
+chmod a+rw $1flexllmgen_offload_dir

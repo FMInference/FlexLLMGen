@@ -11,7 +11,7 @@ import math
 import os
 import time
 
-from flexgen.flex_opt import (Policy, OptLM, ExecutionEnv, CompressionConfig,
+from flexllmgen.flex_opt import (Policy, OptLM, ExecutionEnv, CompressionConfig,
         str2bool)
 from helm.benchmark.presentation.run_entry import RunEntry
 from helm.benchmark.run import run_entries_to_run_specs
@@ -393,9 +393,9 @@ if __name__ == "__main__":
         help="The model name.")
     parser.add_argument("--path", type=str, default="~/opt_weights",
         help="The path to the model weights. If there are no cached weights, "
-             "FlexGen will automatically download them from HuggingFace.")
+             "FlexLLMGen will automatically download them from HuggingFace.")
     parser.add_argument("--run-path", type=str, default="runs")
-    parser.add_argument("--offload-dir", type=str, default="~/flexgen_offload_dir",
+    parser.add_argument("--offload-dir", type=str, default="~/flexllmgen_offload_dir",
         help="The directory to offload tensors. ")
     parser.add_argument("--gpu-batch-size", type=int, default=16)
     parser.add_argument("--num-gpu-batches", type=int, default=1)

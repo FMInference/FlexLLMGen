@@ -16,8 +16,8 @@ The batch size is tuned for each system to achieve its maximum throughput with t
 | ------ | -------- | ------- | -------- |
 | Hugging Face Accelerate  | 2  (gpu) | 8 (cpu)   | 2 (disk)   |
 | DeepSpeed ZeRO-Inference | 16 (cpu) | 4 (cpu)   | 1 (disk)   |
-| FlexGen                  | 2  (gpu) | 144 (cpu) | 256 (disk) |
-| FlexGen with Compression | 72 (gpu) | 512 (cpu) | 144 (cpu)  |
+| FlexLLMGen                  | 2  (gpu) | 144 (cpu) | 256 (disk) |
+| FlexLLMGen with Compression | 72 (gpu) | 512 (cpu) | 144 (cpu)  |
 
 ### Generation Throughput (token/s)
 We attach the generation throughput here for reference.
@@ -26,8 +26,8 @@ We attach the generation throughput here for reference.
 | ------ | -------- | ------- | -------- |
 | Hugging Face Accelerate   | 25.12 | 0.62 | 0.01 |
 | DeepSpeed ZeRO-Inference | 9.28  | 0.60 | 0.01 |
-| FlexGen                  | 25.26 | 7.32 | 0.69 |
-| FlexGen with Compression | **29.12** | **8.38** | **1.12** |
+| FlexLLMGen                  | 25.26 | 7.32 | 0.69 |
+| FlexLLMGen with Compression | **29.12** | **8.38** | **1.12** |
 
 ### About Petals
 We also include [Petals](https://arxiv.org/abs/2209.01188) as an additional baseline.

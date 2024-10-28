@@ -22,10 +22,10 @@ from transformers import AutoTokenizer, AutoConfig, AutoModelForCausalLM
 from transformers import OPTForCausalLM
 import torch
 
-from flexgen.timer import timers
-from flexgen.utils import (GB, project_decode_latency,
+from flexllmgen.timer import timers
+from flexllmgen.utils import (GB, project_decode_latency,
     write_benchmark_log)
-from flexgen.opt_config import (get_opt_config,
+from flexllmgen.opt_config import (get_opt_config,
     disable_torch_init, disable_hf_opt_init)
 
 
@@ -333,7 +333,7 @@ if __name__ == "__main__":
     parser.add_argument("--pin-memory", type=int, default=1)
     parser.add_argument("--cpu-offload", action="store_true")
     parser.add_argument("--disk-offload", action="store_true")
-    parser.add_argument("--offload-dir", type=str, default="~/flexgen_offload_dir")
+    parser.add_argument("--offload-dir", type=str, default="~/flexllmgen_offload_dir")
     parser.add_argument("--int8", action="store_true")
 
     parser.add_argument("--log-file", type=str, default="auto")

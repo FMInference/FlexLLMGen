@@ -6,7 +6,7 @@ We maintain forks of these librares under this repo. They can be installed as fo
 huggingface/transformers: v4.24.0
 
 ```bash
-cd FlexGen/benchmark/third_party/transformers
+cd FlexLLMGen/benchmark/third_party/transformers
 pip3 install -e .
 pip3 install accelerate==0.15.0
 ```
@@ -15,7 +15,7 @@ pip3 install accelerate==0.15.0
 microsoft/DeepSpeed: v0.7.7
 
 ```bash
-cd FlexGen/benchmark/third_party/DeepSpeed
+cd FlexLLMGen/benchmark/third_party/DeepSpeed
 pip3 install -e .
 
 # (Optional) build asyncio ops
@@ -25,7 +25,7 @@ pip3 install -e .
 
 ### PagecacheManagement
 ```bash
-cd FlexGen/third_party/pagecache-mangagement/trunk
+cd FlexLLMGen/third_party/pagecache-mangagement/trunk
 make
 sudo cp *.so /usr/local/lib/
 sudo cp *.sh /usr/local/bin/

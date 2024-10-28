@@ -17,7 +17,7 @@ ALL_IPADDR=($MY_IPADDR ${OTHERS_IPADDR[@]})
 all_hosts=$(echo ${ALL_IPADDR[@]:0:$N_NODES} | sed 's/ /,/g')
 
 PYTHON_EXEC=$CONDA_PREFIX/bin/python
-PYTHON_SCRIPT=flexgen.dist_flex_opt
+PYTHON_SCRIPT=flexllmgen.dist_flex_opt
 
 pgrep -fl python | awk '!/dist_flex_opt\.py/{print $1}' | xargs sudo kill
 

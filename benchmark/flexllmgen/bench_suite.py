@@ -1,7 +1,7 @@
 import argparse
 from dataclasses import dataclass
 
-from flexgen.utils import run_cmd
+from flexllmgen.utils import run_cmd
 
 
 @dataclass
@@ -188,7 +188,7 @@ if __name__ == "__main__":
         cases = suites[suite]
         for case in cases:
             config, name, use_page_maga = case.command, case.name, case.use_page_maga
-            cmd = f"python -m flexgen.flex_opt {config}"
+            cmd = f"python -m flexllmgen.flex_opt {config}"
             if log_file:
                 cmd += f" --log-file {args.log_file}"
             if use_page_maga:

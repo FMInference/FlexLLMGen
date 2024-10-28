@@ -10,7 +10,7 @@ from typing import Dict, List
 
 import pandas as pd
 
-from flexgen.apps.data_wrangle.utils import constants
+from flexllmgen.apps.data_wrangle.utils import constants
 
 logger = logging.getLogger(__name__)
 

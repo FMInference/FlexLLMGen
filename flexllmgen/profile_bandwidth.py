@@ -9,7 +9,7 @@ import os
 import time
 import torch
 
-from flexgen.utils import GB, MB, KB
+from flexllmgen.utils import GB, MB, KB
 
 
 def benchmark_func(func, number, repeat, warmup=3):
@@ -79,7 +79,7 @@ def profile_bandwidth(path):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("--offload-path", type=str, default="~/flexgen_offload_dir/tmp.npy")
+    parser.add_argument("--offload-path", type=str, default="~/flexllmgen_offload_dir/tmp.npy")
     args = parser.parse_args()
 
     profile_bandwidth(os.path.expanduser(args.offload_path))

@@ -190,7 +190,7 @@ class OPTAttention(nn.Module):
             key_states = self._shape(self.k_proj(hidden_states), -1, bsz)
             value_states = self._shape(self.v_proj(hidden_states), -1, bsz)
 
-        from flexgen.compression import compress_and_decompress, get_cache_compression_config
+        from flexllmgen.compression import compress_and_decompress, get_cache_compression_config
         cache_comp_config = get_cache_compression_config()
         if cache_comp_config.enabled:
             key_states = compress_and_decompress(key_states, cache_comp_config)

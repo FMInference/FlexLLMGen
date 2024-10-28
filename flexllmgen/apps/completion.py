@@ -1,7 +1,7 @@
-"""Complete sentences with FlexGen and OPT models."""
+"""Complete sentences with FlexLLMGen and OPT models."""
 import argparse
 
-from flexgen.flex_opt import (Policy, OptLM, ExecutionEnv, CompressionConfig,
+from flexllmgen.flex_opt import (Policy, OptLM, ExecutionEnv, CompressionConfig,
         str2bool)
 from transformers import AutoTokenizer
 
@@ -74,8 +74,8 @@ if __name__ == "__main__":
         help="The model name.")
     parser.add_argument("--path", type=str, default="~/opt_weights",
         help="The path to the model weights. If there are no cached weights, "
-             "FlexGen will automatically download them from HuggingFace.")
-    parser.add_argument("--offload-dir", type=str, default="~/flexgen_offload_dir",
+             "FlexLLMGen will automatically download them from HuggingFace.")
+    parser.add_argument("--offload-dir", type=str, default="~/flexllmgen_offload_dir",
         help="The directory to offload tensors. ")
     parser.add_argument("--percent", nargs="+", type=int,
         default=[100, 0, 100, 0, 100, 0],

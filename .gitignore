@@ -16,12 +16,12 @@ dist
 # cache
 *__pycache__
 *.egg-info
-flexgen/apps/data
-flexgen/apps/runs
-flexgen/apps/benchmark_output
-flexgen/apps/data_wrangle/data
-flexgen/apps/data_wrangle/outputs
-flexgen/apps/data_wrangle/core
+flexllmgen/apps/data
+flexllmgen/apps/runs
+flexllmgen/apps/benchmark_output
+flexllmgen/apps/data_wrangle/data
+flexllmgen/apps/data_wrangle/outputs
+flexllmgen/apps/data_wrangle/core
 
 # pickle
 *.pkl

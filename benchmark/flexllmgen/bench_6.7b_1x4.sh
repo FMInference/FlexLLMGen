@@ -3,10 +3,10 @@
 MY_IPADDR=$(hostname -i)
 all_hosts=$MY_IPADDR
 N_GPUS=4
-N_CORES_PER_GPU=12
+N_CORES_PER_GPU=6
 
 PYTHON_EXEC=$CONDA_PREFIX/bin/python
-PYTHON_SCRIPT=flexgen.dist_flex_opt
+PYTHON_SCRIPT=flexllmgen.dist_flex_opt
 
 pgrep -fl python | awk '!/dist_flex_opt\.py/{print $1}' | xargs sudo kill
 
@@ -21,11 +21,9 @@ mpirun \
     --head-ip $MY_IPADDR \
     --port 7777 \
     --use-mpi \
-    --model facebook/opt-175b \
-    --gpu-batch-size 20 \
-    --percent 0 100 0 100 0 100 \
+    --model facebook/opt-6.7b \
+    --gpu-batch-size 24 \
+    --percent 100 0 100 0 100 0 \
     --comm-device cpu \
-    --path _DUMMY_ \
     --cut-gen-len 5 \
-    --pin-weight 0 \
-    --cpu
+    --path _DUMMY_

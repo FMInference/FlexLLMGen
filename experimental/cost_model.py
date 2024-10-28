@@ -1,5 +1,5 @@
 """
-Cost Model for OPT in FlexGen.
+Cost Model for OPT in FlexLLMGen.
 
 Dependencies:
 pip install pulp
@@ -35,10 +35,10 @@ import math
 import numpy as np
 import pulp
 
-from flexgen.compression import CompressionConfig
-from flexgen.opt_config import get_opt_config
-from flexgen.flex_opt import Policy
-from flexgen.utils import GB, T
+from flexllmgen.compression import CompressionConfig
+from flexllmgen.opt_config import get_opt_config
+from flexllmgen.flex_opt import Policy
+from flexllmgen.utils import GB, T
 
 alpha_g = 0.8
 alpha_c = 0.8

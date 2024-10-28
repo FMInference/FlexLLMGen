@@ -1,12 +1,23 @@
 #!/bin/bash
 
+N_GPUS=1
+N_NODES=4
+N_CORES_PER_GPU=16
+
 MY_IPADDR=$(hostname -i)
-all_hosts=$MY_IPADDR
-N_GPUS=4
-N_CORES_PER_GPU=6
+all_public_ips=$(ray get-worker-ips ~/ray_bootstrap_config.yaml)
+for s in $all_public_ips; do
+    ssh -o StrictHostKeyChecking=no $s hostname -i > /tmp/$s.ip &
+done
+wait
+for s in $all_public_ips; do
+    OTHERS_IPADDR+=($(cat /tmp/$s.ip))
+done
+ALL_IPADDR=($MY_IPADDR ${OTHERS_IPADDR[@]})
+all_hosts=$(echo ${ALL_IPADDR[@]:0:$N_NODES} | sed 's/ /,/g')
 
 PYTHON_EXEC=$CONDA_PREFIX/bin/python
-PYTHON_SCRIPT=flexgen.dist_flex_opt
+PYTHON_SCRIPT=flexllmgen.dist_flex_opt
 
 pgrep -fl python | awk '!/dist_flex_opt\.py/{print $1}' | xargs sudo kill
 
@@ -24,6 +35,6 @@ mpirun \
     --model facebook/opt-6.7b \
     --gpu-batch-size 24 \
     --percent 100 0 100 0 100 0 \
-    --comm-device cpu \
+    --comm-device gpu \
     --cut-gen-len 5 \
     --path _DUMMY_

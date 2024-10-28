@@ -42,7 +42,7 @@ class ExecutionEnv:
     @classmethod
     def create(cls, offload_dir):
         # fix recursive import
-        from flexgen.pytorch_backend import TorchDevice, TorchDisk, TorchMixedDevice
+        from flexllmgen.pytorch_backend import TorchDevice, TorchDisk, TorchMixedDevice
         gpu = TorchDevice("cuda:0")
         cpu = TorchDevice("cpu")
         disk = TorchDisk(offload_dir)

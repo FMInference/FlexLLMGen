@@ -12,25 +12,25 @@ from pathlib import Path
 import time
 import numpy as np
 from transformers import AutoTokenizer, AutoConfig
-import flexgen.apps.data_wrangle.utils.data_utils as data_utils
-import flexgen.apps.data_wrangle.utils.prompt_utils as prompt_utils
-from flexgen.apps.data_wrangle.utils import constants
-from flexgen.apps.data_wrangle.utils.utils import compute_metrics, setup_logger
-from flexgen.flex_opt import (Policy, OptLM, ExecutionEnv, CompressionConfig, str2bool)
+import flexllmgen.apps.data_wrangle.utils.data_utils as data_utils
+import flexllmgen.apps.data_wrangle.utils.prompt_utils as prompt_utils
+from flexllmgen.apps.data_wrangle.utils import constants
+from flexllmgen.apps.data_wrangle.utils.utils import compute_metrics, setup_logger
+from flexllmgen.flex_opt import (Policy, OptLM, ExecutionEnv, CompressionConfig, str2bool)
 
 
 logger = logging.getLogger(__name__)
 
 
-def add_flexgen_args(parser):
+def add_flexllmgen_args(parser):
     parser.add_argument("--pad-to-seq-len", type=int)
     parser.add_argument("--model", type=str, default="facebook/opt-1.3b",
         help="The model name.")
     parser.add_argument("--path", type=str, default="~/opt_weights",
         help="The path to the model weights. If there are no cached weights, "
-             "FlexGen will automatically download them from HuggingFace.")
+             "FlexLLMGen will automatically download them from HuggingFace.")
     parser.add_argument("--run-path", type=str, default="runs")
-    parser.add_argument("--offload-dir", type=str, default="~/flexgen_offload_dir",
+    parser.add_argument("--offload-dir", type=str, default="~/flexllmgen_offload_dir",
         help="The directory to offload tensors. ")
     parser.add_argument("--gpu-batch-size", type=int, default=16)
     parser.add_argument("--num-gpu-batches", type=int, default=1)
@@ -168,10 +168,10 @@ def parse_args() -> argparse.Namespace:
     )
     
     parser.add_argument(
-        "--batch_run", help="Use FlexGen batch inference.", action="store_true"
+        "--batch_run", help="Use FlexLLMGen batch inference.", action="store_true"
     )
     
-    add_flexgen_args(parser)
+    add_flexllmgen_args(parser)
     
     args = parser.parse_args()
     return args
@@ -317,7 +317,7 @@ def single_query_test(args, task_instruction, test_data, task, pd_data_files, te
     logger.info(f"Final Metrics {json.dumps(trial_metrics, indent=4)}")
     logger.info(f"Metrics dumped to {output_metrics}")
     # Shutdown
-    logger.info("Shutdown FlexGen...")
+    logger.info("Shutdown FlexLLMGen...")
     env.close_copy_threads()
 
 
@@ -405,13 +405,13 @@ def batch_query_test(args, task_instruction, test_data, task, pd_data_files, tes
                                   max_length=max_prompt_seq_length).input_ids
         output_ids = []
         
-        flexgen_batch_size = args.gpu_batch_size*args.num_gpu_batches
-        num_batched_run = math.floor(args.num_run/flexgen_batch_size)
-        args.num_run = num_batched_run * flexgen_batch_size
+        flexllmgen_batch_size = args.gpu_batch_size*args.num_gpu_batches
+        num_batched_run = math.floor(args.num_run/flexllmgen_batch_size)
+        args.num_run = num_batched_run * flexllmgen_batch_size
         input_ids = input_ids[0:args.num_run]
         
         for i in tqdm(range(num_batched_run)):
-            input_ids_tmp = input_ids[i*flexgen_batch_size: (i+1)*flexgen_batch_size]
+            input_ids_tmp = input_ids[i*flexllmgen_batch_size: (i+1)*flexllmgen_batch_size]
             output_ids_tmp = model.generate(input_ids_tmp,
                                             do_sample=True,
                                             temperature=args.temperature,
@@ -443,9 +443,9 @@ def batch_query_test(args, task_instruction, test_data, task, pd_data_files, tes
         logger.info(
             f"Metrics Trial {trial_num}\n"
             f"Prec: {prec:.3f} Recall: {rec:.3f} Acc: {acc:.3f} F1: {f1:.3f} \n"
-            f"<FlexGen> time: {total_time:.3f} \n" 
-            f"<FlexGen> output throughput: {output_throughput:.3f} \n"
-            f"<FlexGen> total throughput: {total_throughput:.3f}"
+            f"<FlexLLMGen> time: {total_time:.3f} \n" 
+            f"<FlexLLMGen> output throughput: {output_throughput:.3f} \n"
+            f"<FlexLLMGen> total throughput: {total_throughput:.3f}"
         )
         trial_metrics["rec"].append(rec)
         trial_metrics["prec"].append(prec)
@@ -485,7 +485,7 @@ def batch_query_test(args, task_instruction, test_data, task, pd_data_files, tes
     logger.info(f"Final Metrics {json.dumps(trial_metrics, indent=4)}")
     logger.info(f"Metrics dumped to {output_metrics}")
     # Shutdown
-    logger.info("Shutdown FlexGen...")
+    logger.info("Shutdown FlexLLMGen...")
     env.close_copy_threads()
     
 

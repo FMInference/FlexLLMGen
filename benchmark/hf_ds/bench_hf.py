@@ -2,7 +2,7 @@ import argparse
 from dataclasses import dataclass
 import time
 
-from flexgen.utils import run_cmd
+from flexllmgen.utils import run_cmd
 
 
 def run_huggingface(model, prompt_len, gen_len, cut_gen_len, batch_size,

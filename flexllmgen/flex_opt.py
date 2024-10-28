@@ -1,6 +1,6 @@
 """
 Usage:
-python3 -m flexgen.flex_opt --model facebook/opt-1.3b --gpu-batch-size 32 --percent 100 0 100 0 100 0
+python3 -m flexllmgen.flex_opt --model facebook/opt-1.3b --gpu-batch-size 32 --percent 100 0 100 0 100 0
 """
 
 import argparse
@@ -15,12 +15,12 @@ from tqdm import tqdm
 import torch
 from transformers import AutoTokenizer
 
-from flexgen.compression import CompressionConfig
-from flexgen.opt_config import OptConfig, get_opt_config, download_opt_weights
-from flexgen.pytorch_backend import (TorchDevice, TorchDisk, TorchLink,
+from flexllmgen.compression import CompressionConfig
+from flexllmgen.opt_config import OptConfig, get_opt_config, download_opt_weights
+from flexllmgen.pytorch_backend import (TorchDevice, TorchDisk, TorchLink,
     TorchMixedDevice, DeviceType, general_copy, fix_recursive_import)
-from flexgen.timer import timers
-from flexgen.utils import (Task, ExecutionEnv, GB, T, ValueHolder,
+from flexllmgen.timer import timers
+from flexllmgen.utils import (Task, ExecutionEnv, GB, T, ValueHolder,
     array_1d, array_2d, array_3d, str2bool, project_decode_latency,
     torch_mem_stats, torch_dtype_to_np_dtype, write_benchmark_log,
     read_benchmark_log)
@@ -1176,8 +1176,8 @@ def get_test_inputs(prompt_len, num_prompts, tokenizer):
     return (input_ids[0],) * num_prompts
 
 
-def run_flexgen(args):
-    print(f"<run_flexgen>: args.model: {args.model}")
+def run_flexllmgen(args):
+    print(f"<run_flexllmgen>: args.model: {args.model}")
     if args.model == "facebook/galactica-30b":
         tokenizer = AutoTokenizer.from_pretrained("facebook/galactica-30b", padding_side="left")
     else:
@@ -1277,8 +1277,8 @@ def add_parser_arguments(parser):
         help="The model name.")
     parser.add_argument("--path", type=str, default="~/opt_weights",
         help="The path to the model weights. If there are no cached weights, "
-             "FlexGen will automatically download them from HuggingFace.")
-    parser.add_argument("--offload-dir", type=str, default="~/flexgen_offload_dir",
+             "FlexLLMGen will automatically download them from HuggingFace.")
+    parser.add_argument("--offload-dir", type=str, default="~/flexllmgen_offload_dir",
         help="The directory to offload tensors. ")
     parser.add_argument("--prompt-len", type=int, default=512)
     parser.add_argument("--gen-len", type=int, default=32)
@@ -1324,4 +1324,4 @@ if __name__ == "__main__":
 
     assert len(args.percent) == 6
 
-    run_flexgen(args)
+    run_flexllmgen(args)

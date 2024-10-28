@@ -10,17 +10,17 @@ import torch
 import torch.distributed as dist
 from transformers import AutoTokenizer
 
-from flexgen.compression import CompressionConfig
-from flexgen.dist_utils import initialize_distributed
-from flexgen.flex_opt import (Policy, InputEmbed, OutputEmbed, SelfAttention,
+from flexllmgen.compression import CompressionConfig
+from flexllmgen.dist_utils import initialize_distributed
+from flexllmgen.flex_opt import (Policy, InputEmbed, OutputEmbed, SelfAttention,
                               MLP, TransformerLayer, OptLM, get_filename,
                               add_parser_arguments, get_test_inputs,
                               DUMMY_WEIGHT)
-from flexgen.opt_config import get_opt_config
-from flexgen.pytorch_backend import (TorchDevice, TorchDisk, TorchLink,
+from flexllmgen.opt_config import get_opt_config
+from flexllmgen.pytorch_backend import (TorchDevice, TorchDisk, TorchLink,
     TorchMixedDevice, TorchTensor)
-from flexgen.timer import timers
-from flexgen.utils import (Task, ExecutionEnv, GB, T, ValueHolder,
+from flexllmgen.timer import timers
+from flexllmgen.utils import (Task, ExecutionEnv, GB, T, ValueHolder,
     array_1d, array_2d, array_3d, array_4d, str2bool, project_decode_latency)
 
 
@@ -536,7 +536,7 @@ def comm_test(comm_device):
     assert a.item() == args.world_size
 
 
-def run_flexgen_dist(args):
+def run_flexllmgen_dist(args):
     t_name = args.model.replace("175b", "66b")
     tokenizer = AutoTokenizer.from_pretrained(t_name, padding_side="left")
     num_inner_iterations = args.num_inner_iterations if args.num_inner_iterations is not None else args.world_size
@@ -684,7 +684,7 @@ if __name__ == "__main__":
     assert len(args.percent) == 6
 
     try:
-        run_flexgen_dist(args)
+        run_flexllmgen_dist(args)
     except Exception as e:
         print(str(e))
         traceback.print_exc()

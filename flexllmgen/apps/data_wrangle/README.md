@@ -1,6 +1,6 @@
-# FlexGen for Data Wrangling Tasks.
+# FlexLLMGen for Data Wrangling Tasks.
 
-Here we show how to use FlexGen for the data wrangling tasks including entity match (EM), data imputation (DI) and error detection (ED). The implementation follows the [fm_data_tasks](https://github.com/HazyResearch/fm_data_tasks) repo from [HazyResearch](https://github.com/HazyResearch).
+Here we show how to use FlexLLMGen for the data wrangling tasks including entity match (EM), data imputation (DI) and error detection (ED). The implementation follows the [fm_data_tasks](https://github.com/HazyResearch/fm_data_tasks) repo from [HazyResearch](https://github.com/HazyResearch).
 
 ## Install
 
@@ -13,7 +13,7 @@ Here we show how to use FlexGen for the data wrangling tasks including entity ma
 
       bash test_single_query_case.sh
 
-- To test the throughput of FlexGen for a data imputation task (e.g., Restaurant on OPT-6.7B), run:
+- To test the throughput of FlexLLMGen for a data imputation task (e.g., Restaurant on OPT-6.7B), run:
 
       bash test_batch_query_case.sh
 

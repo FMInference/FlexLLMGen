@@ -1,5 +1,5 @@
 """
-An old script for fitting the cost model for OPT in FlexGen.
+An old script for fitting the cost model for OPT in FlexLLMGen.
 
 Warning:
 The script has not been cleaned for release.
@@ -16,8 +16,8 @@ import torch.nn.functional as F
 from tqdm import tqdm
 
 from experiments.run_exp import ExpConfig, cases, get_filename
-from flexgen.opt_config import get_opt_config
-from flexgen.utils import GB, T
+from flexllmgen.opt_config import get_opt_config
+from flexllmgen.utils import GB, T
 
 class CostModel(nn.Module):
     def __init__(self):

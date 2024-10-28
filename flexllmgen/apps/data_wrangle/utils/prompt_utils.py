@@ -10,8 +10,8 @@ import numpy as np
 import pandas as pd
 from sentence_transformers import SentenceTransformer
 
-from flexgen.apps.data_wrangle.utils import constants
-from flexgen.apps.data_wrangle.utils.data_utils import sample_train_data
+from flexllmgen.apps.data_wrangle.utils import constants
+from flexllmgen.apps.data_wrangle.utils.data_utils import sample_train_data
 
 logger = logging.getLogger(__name__)
 
